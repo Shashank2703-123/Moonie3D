@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class WaveManager : MonoBehaviour
     private bool canSpawn = true;
     public GameObject[] EnemieObj;
     private float nextspawnTime;
+    public GameObject Canvas;
+    public Text WaveNumber;
+    private bool IncreaseNumber = false;
+    public PlayerController player;
 
     // Start is called before the first frame update
     void Start()
@@ -38,15 +43,15 @@ public class WaveManager : MonoBehaviour
         currentWave = waves[CurrentWaveNumber];      
         SpawnWave();
         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        WaveNumber.text = waves[CurrentWaveNumber].WaveName;
 
-
-        if (totalEnemies.Length == 0 && !canSpawn)
+        if (totalEnemies.Length == 0 && !canSpawn && !IncreaseNumber)
         {
-            canSpawn = true;
-          
+            NextWave();
             CurrentWaveNumber++;
-       //     PlayerCharac.Health = PlayerCharac.MaxHp;
-         //   HealthBars.RestartHp();
+            IncreaseNumber = true;
+            //     PlayerCharac.Health = PlayerCharac.MaxHp;
+            //   HealthBars.RestartHp();
             //   Enemies.text = "";
             //   WaveTransition();
         }
@@ -56,6 +61,24 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    public void NextWave()
+    {
+      
+        Canvas.GetComponent<Animator>().SetBool("Wave", true);
+        Invoke("StartWave", 2f);
+      
+    }
+
+    public void StartWave()
+    {
+        Canvas.GetComponent<Animator>().SetBool("Wave", false);
+        canSpawn = true;
+        IncreaseNumber = false;
+        player.Health = 100;
+
+
+       
+    }
     private void SpawnWave()
     {
         if (canSpawn && nextspawnTime < Time.time)

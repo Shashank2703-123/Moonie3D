@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    public GameObject Explosion;
+    public PlayerController player;
+    public int Damage = 1;
     
     // Start is called before the first frame update
     void Start()
     {
         Invoke("DestroyObj", 3f);
+        player = GameObject.Find("MainCharacter").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -28,15 +32,19 @@ public class BulletScript : MonoBehaviour
        
         if(collision.gameObject.tag == "Enemy")
         {
+
+            Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
 
             if(collision.gameObject.GetComponent<enemyAI>().Hp <= 0)
             {
-                Destroy(collision.gameObject);
+                player.Exp += 0.3f; 
+                collision.gameObject.GetComponent<enemyAI>().Death();
             }
             else
             {
-                collision.gameObject.GetComponent<enemyAI>().Hp--;
+                player.Exp += 0.1f;
+                collision.gameObject.GetComponent<enemyAI>().Hp -= Damage;
             }
        
         }

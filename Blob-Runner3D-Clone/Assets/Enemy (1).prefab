@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.33, z: 1}
-  m_Center: {x: 0, y: 1.12, z: 0}
+  m_Size: {x: 1.66115, y: 2.33, z: 1.991313}
+  m_Center: {x: -0.020155907, y: 1.1199999, z: 0.19855642}
 --- !u!114 &2339637566375004139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,10 +63,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   speed: 3
   Player: {fileID: 0}
   StartPointIndex: 0
   Hp: 0
+  Range: 6
+  Splatter: {fileID: 142478, guid: 120d855bc18f7fa4f8c46575d5629105, type: 3}
+  Blood: {fileID: 192166, guid: 4f1e869b13b62324987bb11603a13258, type: 3}
 --- !u!54 &2339637566375004148
 Rigidbody:
   m_ObjectHideFlags: 0
